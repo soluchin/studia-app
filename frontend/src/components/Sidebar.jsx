@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const Sidebar = () => {
   return (
-    <div className="d-flex flex-column vh-100 bg-light p-3" style={{ width: '200px' }}>
+    <div className="d-flex flex-column vh-100 bg-light p-3" style={{ width: '250px' }}>
       <h3>Studia Portal</h3>
       <ul className="nav flex-column">
         <li className="nav-item mb-2">

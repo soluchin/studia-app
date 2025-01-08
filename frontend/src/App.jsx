@@ -8,9 +8,9 @@ function App() {
 
   return (
     <Router>
-      <div className="d-flex">
+      <div className="d-flex container-fluid">
         <Sidebar />
-        <div className="mx-2 flex-grow-1">
+        <div className="mx-4   flex-grow-1">
           <Routes>
             <Route path="/" element={<ParentPage />} />
             <Route path="/parent" element={<ParentPage />} />
