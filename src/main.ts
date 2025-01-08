@@ -7,7 +7,7 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 import { QueryErrorFilter } from './utils/query-error-filter.util';
 
 const port = process.env.APP_PORT || 3000;
-const apiPrefix = process.env.API_PREFIX || 'api';
+const apiPrefix = 'api';
 
 async function bootstrap() {
   
