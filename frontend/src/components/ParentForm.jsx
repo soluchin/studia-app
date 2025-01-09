@@ -27,7 +27,7 @@ const ParentForm = ({ isEditMode, selected }) => {
           Swal.fire({
             icon: 'error',
             title: 'Something went error',
-            text: error,
+            text: error.message,
           });
         }
       });
@@ -66,7 +66,7 @@ const ParentForm = ({ isEditMode, selected }) => {
           Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: error,
+            text: error.message,
           });
         });
     }else{
@@ -80,10 +80,11 @@ const ParentForm = ({ isEditMode, selected }) => {
           });
         })
         .catch((error) => {
+          console.log(error);
           Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: error,
+            text: error.message,
           });
         });
     }

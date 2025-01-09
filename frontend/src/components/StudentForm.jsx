@@ -70,7 +70,7 @@ const StudentForm = ({ isEditMode, selected }) => {
           Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: error,
+            text: error.message,
           });
         });
     }else{
@@ -87,7 +87,7 @@ const StudentForm = ({ isEditMode, selected }) => {
           Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: error,
+            text: error.message,
           });
         });
     }
