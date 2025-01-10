@@ -1,33 +1,59 @@
-FROM node:lts-alpine
+# Stage 1: Build the Vite React frontend
+FROM node:18-alpine AS frontend-build
 
-ENV NODE_ENV=production
+# Set working directory for frontend
+WORKDIR /app/frontend
 
-WORKDIR /usr/src/app
+# Copy the frontend code
+COPY frontend/package*.json ./
+COPY frontend/ ./
 
-COPY ["package.json", "package-lock.json*", "npm-shrinkwrap.json*", "./"]
+# Copy if you use typescript
+# COPY tsconfig*.json ./
 
-RUN npm install
+# Install dependencies and build the frontend
+RUN npm install && npm run build
 
-COPY . .
+# Stage 2: Build the NestJS backend
+FROM node:18-alpine AS backend-build
 
-# Install NestJS CLI globally
-RUN npm install -g @nestjs/cli
+# Set working directory for backend
+WORKDIR /app
 
-# Build the React frontend
-WORKDIR /usr/src/app/frontend
+# Copy the backend code
+COPY src/ ./src
+COPY package*.json ./
 
-RUN npm install --include=dev
-RUN npm run build
+# Copy the Nest CLI and app's configuration files
+COPY tsconfig*.json ./
+COPY nest-cli.json ./
 
-# Back to the root directory
-WORKDIR /usr/src/app
+# Install dependencies and build the backend
+RUN npm install && npm run build
 
+# Stage 3: Final runtime image
+FROM node:18-alpine
+
+# Set working directory for runtime
+WORKDIR /app
+
+# Copy built NestJS backend and dependencies
+COPY --from=backend-build /app/dist ./dist
+COPY --from=backend-build /app/package*.json ./
+
+# Copy built Vite React frontend into the static directory of NestJS
+COPY --from=frontend-build /app/frontend/dist ./frontend/dist
+COPY --from=backend-build /app/package*.json ./frontend
+
+# Install only production dependencies
+RUN npm ci --only=production && npm cache clean --force
+WORKDIR /app/frontend
+RUN npm ci --only=production && npm cache clean --force
+
+WORKDIR /app
+
+# Expose the port your NestJS app runs on
 EXPOSE 3000
 
-RUN chown -R node /usr/src/app
-
-RUN npm run build
-
-USER node
-
+# Set the command to run the NestJS server
 CMD ["npm", "run", "start:prod"]
