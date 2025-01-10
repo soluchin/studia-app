@@ -30,7 +30,7 @@ STUDIA PORTAL - CRUD STUDENT PARENT
 
 - node*
 - npm*
-- nest-cli*: ```npm i -g @nestjs/cli```
+- nest-cli*: ```npm install -g @nestjs/cli```
 - vite*: ```npm install -g vite```
 - postgres*
 - docker (alternate)
