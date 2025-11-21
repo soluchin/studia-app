@@ -28,12 +28,13 @@ STUDIA PORTAL - CRUD STUDENT PARENT
 
 ## Requirement
 
-- node*
-- npm*
-- nest-cli*: ```npm install -g @nestjs/cli```
+- node\textcolor{*} version 22.14.0
+- npm\textcolor{*} verision 10.9.2
+- nest-cli\textcolor{*}: ```npm install -g @nestjs/cli```
 - vite*: ```npm install -g vite```
-- postgres*
+- postgres\textcolor{*}
 - docker (alternate)
+\textcolor{*} required
 
 ## Project setup
 
