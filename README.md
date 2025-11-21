@@ -28,8 +28,8 @@ STUDIA PORTAL - CRUD STUDENT PARENT
 
 ## Requirement
 
-- node*
-- npm*
+- node* version 22.14.0
+- npm* verision 10.9.2
 - nest-cli*: ```npm install -g @nestjs/cli```
 - vite*: ```npm install -g vite```
 - postgres*
